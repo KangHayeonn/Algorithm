@@ -44,7 +44,7 @@ public class Q17143 {
 		R = Integer.parseInt(st.nextToken());
 		C = Integer.parseInt(st.nextToken());
 		M = Integer.parseInt(st.nextToken());
-		
+
 		map = new Type2[R][C];
 		for(int i=0; i<M; i++) {
 			st = new StringTokenizer(br.readLine());
@@ -53,13 +53,13 @@ public class Q17143 {
 			int s = Integer.parseInt(st.nextToken());
 			int d = Integer.parseInt(st.nextToken())-1;
 			int z = Integer.parseInt(st.nextToken());
-			
+
 			if(d <= 1) s %= (R - 1) * 2; // 불필요한 연산을 줄여주기 위해 속도 연산을 최소화로 줄여줌 (시간초과 방지)
 			else s %= (C - 1) * 2;
-			
+
 			map[r][c] = new Type2(s, d, z);
 		}
-		
+
 		int depth = -1;
 		while(depth < C-1) { // C와 같아지면 탈출 (C초 후)
 			// 낚시왕이 오른쪽으로 한칸이동
@@ -111,12 +111,12 @@ public class Q17143 {
 				return move(r, c-1, s, d, z, depth+1);
 			}
 		}
-		
+
 		if(depth==0) {
 			Type t = new Type(r, c, s, d, z);
 			return t;
 		}
-		
+
 		if(d==0) {
 			return move(r-1, c, s, d, z, depth-1);
 		}
@@ -132,12 +132,12 @@ public class Q17143 {
 	}
 	public static void removeShark() {
 		boolean[][] isVisited = new boolean[R][C];
-		
+
 		while(!shark.isEmpty()) {
 			Type t = shark.poll();
-			
+
 			if(isVisited[t.r][t.c]) continue;
-			
+
 			map[t.r][t.c] = new Type2(t.s, t.d, t.z);
 			isVisited[t.r][t.c] = true;
 		}
